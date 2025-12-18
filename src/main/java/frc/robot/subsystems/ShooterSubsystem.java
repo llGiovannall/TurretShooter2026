@@ -15,7 +15,7 @@ import frc.robot.vision.LimelightHelpers;
 import static edu.wpi.first.units.Units.Volts;
 
 
-public class Shooter {
+public class ShooterSubsystem {
 private SparkFlex FollowerRight = new SparkFlex(14, MotorType.kBrushless);
 private  SparkFlex FollowerLeft = new SparkFlex(21, MotorType.kBrushless);
  private TalonFX ShooterLeader = new TalonFX(8);
@@ -54,7 +54,7 @@ private  SparkFlex FollowerLeft = new SparkFlex(21, MotorType.kBrushless);
       
          
 
-public Shooter() {
+public ShooterSubsystem() {
  TalonFXConfiguration configs = new TalonFXConfiguration();
 configs.Slot0.kP = 2.4; 
 configs.Slot0.kI = 0; 

@@ -34,7 +34,7 @@ import frc.robot.vision.LimelightHelpers;
 
 
 
-public class Turret extends SubsystemBase {
+public class TurretSubsystem extends SubsystemBase {
 
   SparkFlex turretMotor = new SparkFlex(2, MotorType.kBrushless);
   private SparkClosedLoopController closedLoopController;
@@ -49,7 +49,7 @@ public class Turret extends SubsystemBase {
    private final PIDController pid =
          new PIDController(kP.get(), kI.get(), kD.get());
     
-public Turret(){
+public TurretSubsystem(){
 closedLoopController = turretMotor.getClosedLoopController();
         motorConfig.closedLoop
             .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -69,8 +69,12 @@ closedLoopController = turretMotor.getClosedLoopController();
 
 }
 
-public void rotate(){
+public void rotateRight(){
   turretMotor.set(0.2);
+}
+
+public void rotateLeft(){
+  turretMotor.set(-0.2);
 }
 
 public void periodic(){
@@ -84,4 +88,6 @@ public void setTurn(){
    double output = pid.calculate(tx, 0); 
    turretMotor.set(output);
 }
+
+
 }

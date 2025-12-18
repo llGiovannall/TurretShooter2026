@@ -6,11 +6,13 @@ package frc.robot;
 
 import frc.Commands.AlignToTarget;
 import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.TurretSubsystem;
 
 import java.security.DrbgParameters;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -22,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Turret m_turret= new Turret();
+  private final TurretSubsystem turretSubsystem = new TurretSubsystem();
  private final CommandXboxController m_driverController = new CommandXboxController(0);
    
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -44,10 +46,17 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    this.m_driverController.b().onTrue(
+    this.m_driverController.b().whileTrue(
       new AlignToTarget(m_turret)
     );
 
+    this.m_driverController.a().whileTrue(
+      Commands.run(() -> turretSubsystem.rotateLeft(), turretSubsystem)
+    );
+
+    this.m_driverController.a().whileTrue(
+      Commands.run(() -> turretSubsystem.rotateRight(), turretSubsystem)
+    );
     
   
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
