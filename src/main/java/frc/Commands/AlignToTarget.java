@@ -7,6 +7,7 @@ private final TurretSubsystem  turret;
 
 public AlignToTarget(TurretSubsystem turret){
     this.turret = turret;
+    addRequirements(turret);
 }
 
 public void execute(){

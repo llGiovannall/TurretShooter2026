@@ -27,14 +27,18 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    this.m_driverController.a().whileTrue(
-      Commands.run(() -> turretSubsystem.rotateLeft(), turretSubsystem)
-    );
+   // this.m_driverController.a().whileTrue(
+    //  Commands.run(() -> turretSubsystem.rotateLeft(), turretSubsystem)
+   // );
 
-    this.m_driverController.a().whileTrue(
-      Commands.run(() -> turretSubsystem.rotateRight(), turretSubsystem)
-    );
-    
+    this.m_driverController.a().whileTrue(Commands.run(() -> turretSubsystem.setTurn()).until(() -> turretSubsystem.atTarget())).onFalse(turretSubsystem.Stop());
+
+ this.m_driverController.b().onTrue(
+  Commands.run(() -> turretSubsystem.Stop(), turretSubsystem)
+ );
+
+ this.m_driverController.a().whileTrue(
+ new AlignToTarget(turretSubsystem));
 
   }
 
