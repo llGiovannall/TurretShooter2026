@@ -23,9 +23,9 @@ import static edu.wpi.first.units.Units.Volts;
 
 
 public class ShooterSubsystem {
-private SparkFlex anglemotor = new SparkFlex(14, MotorType.kBrushless);
-private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
- private TalonFX ShooterLeader = new TalonFX(8);
+private SparkFlex hoodMotor = new SparkFlex(14, MotorType.kBrushless);
+private  SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
+ private TalonFX shooterFront = new TalonFX(8);
  private static InterpolatingDoubleTreeMap angleMap = new InterpolatingDoubleTreeMap();
   private SparkClosedLoopController closedLoopController;
   private SparkFlexConfig motorConfig;
@@ -65,16 +65,16 @@ private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
  
  public ShooterSubsystem() {
       interpolationTreeAngle();
-  TalonFXConfiguration configs = new TalonFXConfiguration();
- configs.Slot0.kP = 2.4; 
- configs.Slot0.kI = 0; 
- configs.Slot0.kD = 0.1; 
- configs.Voltage.withPeakForwardVoltage(Volts.of(8))
+  TalonFXConfiguration setShooterConfig = new TalonFXConfiguration();
+setShooterConfig.Slot0.kP = 2.4; 
+ setShooterConfig.Slot0.kI = 0; 
+setShooterConfig.Slot0.kD = 0.1; 
+ setShooterConfig.Voltage.withPeakForwardVoltage(Volts.of(8))
    .withPeakReverseVoltage(Volts.of(-8));
  
-   final SparkFlexConfig motorConfig;
-   motorConfig = new SparkFlexConfig();
- closedLoopController = anglemotor.getClosedLoopController();
+   final SparkFlexConfig setHoodConfig;
+   setHoodConfig = new SparkFlexConfig();
+ closedLoopController = hoodMotor.getClosedLoopController();
        motorConfig.closedLoop
              // Set PID values for velocity control in slot 1
              .p(0.05, ClosedLoopSlot.kSlot1)
@@ -83,13 +83,13 @@ private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
              .velocityFF(1.0 / 5767, ClosedLoopSlot.kSlot1)
              .outputRange(-0.6, 0.6, ClosedLoopSlot.kSlot1);
              motorConfig.inverted(true);
-             anglemotor.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+             hoodMotor.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
              anglemotorpid.setTolerance(1);
           
               
               
            
-             closedLoopController = motorFollower.getClosedLoopController();
+             closedLoopController = shooterBack.getClosedLoopController();
                    motorConfig.closedLoop
                          // Set PID values for velocity control in slot 1
                          .p(0.05, ClosedLoopSlot.kSlot1)
@@ -98,10 +98,14 @@ private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
                          .velocityFF(1.0 / 5767, ClosedLoopSlot.kSlot1)
                          .outputRange(-0.6, 0.6, ClosedLoopSlot.kSlot1);
                          motorConfig.inverted(true);
-                         motorFollower.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+                         shooterBack.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
                          motorFollowerpid.setTolerance(1);
  }
  
+public void setHoodAngle(){
+
+}
+
 
  private static void interpolationTreeAngle(){
        angleMap.put(12.0, 45.0);
@@ -110,19 +114,16 @@ private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
        angleMap.put(15.0, 30.0);
 }
 
-public void setShotAngle(){
+public void setShotAngleByDistance(){
       double ty = LimelightHelpers.getTY("limelight");
      double targetDegrees = angleMap.get(ty);
-     double currentDegrees = anglemotor.getEncoder().getPosition();
+     double currentDegrees = hoodMotor.getEncoder().getPosition();
      double output = anglemotorpid.calculate(currentDegrees, targetDegrees );
      SmartDashboard.putNumber("Ty", ty);
      SmartDashboard.putNumber("output", output);
-     anglemotor.set(output);
+     hoodMotor.set(output);
 }
 
-public void angle(){
-      anglemotor.set(-0.5);
-}
    
 }
 
