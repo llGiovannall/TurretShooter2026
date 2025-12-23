@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.vision.LimelightHelpers;
 
@@ -65,14 +66,21 @@ public class Robot extends LoggedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
   }
-
-  /** This function is called periodically during autonomous. */
+    // ScheduleCommand the autonomous Object example;
+       //  command (example)
+        //     if (m_autonomousCommand != null) {
+        //      m_autonomousCommand.schedule();
+         //    }
+         //  }
+         
+           private void command(Object example) {
+             // TODO Auto-generated method stub
+             throw new UnsupportedOperationException("Unimplemented method 'command'");
+           }
+         
+         
+           /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
 

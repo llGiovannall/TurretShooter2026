@@ -80,17 +80,7 @@ public void periodic(){
  
 }
 
-//public Command setTurn(){
-  //return run(() -> {
-   //double target = LimelightHelpers.getTX("");
-   // double output = pid.calculate(target, 0); 
-    
-   // SmartDashboard.putNumber("Target", target);
-   // SmartDashboard.putNumber("PID Turret: ", output);
-  
-   // turretMotor.set(output);
- // });
-//}
+
 
 public void setTurn(){
    double target = LimelightHelpers.getTX("");
