@@ -30,6 +30,7 @@ private  SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
   private SparkClosedLoopController closedLoopController;
   private SparkFlexConfig motorConfig;
   private LimelightHelpers limelight;
+ private double goalHoodPosition;
 
  
        
@@ -37,6 +38,7 @@ private  SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
           
  
  public ShooterSubsystem() {
+      this.goalHoodPosition = 0;
       interpolationTreeAngle();
   TalonFXConfiguration setShooterConfig = new TalonFXConfiguration();
 setShooterConfig.Slot0.kP = 2.4; 
@@ -71,9 +73,14 @@ setShooterConfig.Slot0.kD = 0.1;
                          shooterBack.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
                          motorFollowerpid.setTolerance(1);
  }
- 
-public void setHoodAngle(){
 
+ 
+public void setHoodAngleBack(){
+hoodMotor.set(0.4);
+}
+
+public void setHoodAngleFront(){
+      hoodMotor.set(-0.4);
 }
 
 
@@ -125,7 +132,7 @@ private final PIDController anglemotorpid =
 
  
   
-  
+
 
 
 
