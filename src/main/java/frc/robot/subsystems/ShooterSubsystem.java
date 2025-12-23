@@ -30,34 +30,7 @@ private  SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
   private SparkClosedLoopController closedLoopController;
   private SparkFlexConfig motorConfig;
   private LimelightHelpers limelight;
-  
- 
-  private final LoggedTunableNumber anglemotorkP =
-    new LoggedTunableNumber("motor1/kP", 0.1);
-    private final LoggedTunableNumber anglemotorkI =
-    new LoggedTunableNumber("motor1/kI", 0.1);
-    private final LoggedTunableNumber anglemotorkD =
-    new LoggedTunableNumber("motor1/kD", 0.1);
-    private final PIDController anglemotorpid =
-          new PIDController(anglemotorkP.get(), anglemotorkI.get(),anglemotorkD.get());
- 
-          private final LoggedTunableNumber motorFollowerkP =
-          new LoggedTunableNumber("anglemotor/kP", 0.1);
-          private final LoggedTunableNumber motorFollowerkI =
-          new LoggedTunableNumber("anglemotor/kI", 0.1);
-          private final LoggedTunableNumber motorFollowerkD =
-          new LoggedTunableNumber("anglemotor/kD", 0.1);
-          private final PIDController motorFollowerpid =
-                new PIDController(motorFollowerkP.get(), motorFollowerkI.get(), motorFollowerkD.get());
- 
-                private final LoggedTunableNumber ShooterLeaderkP =
-                new LoggedTunableNumber("FollowerLeft/kP", 0.1);
-                private final LoggedTunableNumber ShooterLeaderkI =
-                new LoggedTunableNumber("FollowerLeft/kI", 0.1);
-                private final LoggedTunableNumber ShooterLeaderkD =
-                new LoggedTunableNumber("FollowerLeft/kD", 0.1);
-                private final PIDController ShooterLeaderpid =
-                      new PIDController(ShooterLeaderkP.get(), ShooterLeaderkI.get(), ShooterLeaderkD.get());
+
  
        
        
@@ -86,9 +59,6 @@ setShooterConfig.Slot0.kD = 0.1;
              hoodMotor.configure(motorConfig, SparkBase.ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
              anglemotorpid.setTolerance(1);
           
-              
-              
-           
              closedLoopController = shooterBack.getClosedLoopController();
                    motorConfig.closedLoop
                          // Set PID values for velocity control in slot 1
@@ -125,6 +95,32 @@ public void setShotAngleByDistance(){
 }
 
    
+private final LoggedTunableNumber anglemotorkP =
+new LoggedTunableNumber("motor1/kP", 0.1);
+private final LoggedTunableNumber anglemotorkI =
+new LoggedTunableNumber("motor1/kI", 0.1);
+private final LoggedTunableNumber anglemotorkD =
+new LoggedTunableNumber("motor1/kD", 0.1);
+private final PIDController anglemotorpid =
+      new PIDController(anglemotorkP.get(), anglemotorkI.get(),anglemotorkD.get());
+
+      private final LoggedTunableNumber motorFollowerkP =
+      new LoggedTunableNumber("anglemotor/kP", 0.1);
+      private final LoggedTunableNumber motorFollowerkI =
+      new LoggedTunableNumber("anglemotor/kI", 0.1);
+      private final LoggedTunableNumber motorFollowerkD =
+      new LoggedTunableNumber("anglemotor/kD", 0.1);
+      private final PIDController motorFollowerpid =
+            new PIDController(motorFollowerkP.get(), motorFollowerkI.get(), motorFollowerkD.get());
+
+            private final LoggedTunableNumber ShooterLeaderkP =
+            new LoggedTunableNumber("FollowerLeft/kP", 0.1);
+            private final LoggedTunableNumber ShooterLeaderkI =
+            new LoggedTunableNumber("FollowerLeft/kI", 0.1);
+            private final LoggedTunableNumber ShooterLeaderkD =
+            new LoggedTunableNumber("FollowerLeft/kD", 0.1);
+            private final PIDController ShooterLeaderpid =
+                  new PIDController(ShooterLeaderkP.get(), ShooterLeaderkI.get(), ShooterLeaderkD.get());
 }
 
  

@@ -43,12 +43,6 @@ public class RobotContainer {
 
  //this.m_driverController.a().whileTrue(
  //new AlignToTarget(turretSubsystem));
-
- this.m_driverController.x().whileTrue(Commands.run(() -> shooterSubsystem.setShotAngle()));
-
-
-
-this.m_driverController.y().whileTrue(Commands.run(() -> shooterSubsystem.angle()));
   }
 
 
