@@ -104,10 +104,10 @@ private  SparkFlex motorFollower = new SparkFlex(21, MotorType.kBrushless);
  
 
  private static void interpolationTreeAngle(){
-       angleMap.put(2.0, 45.0);
-       angleMap.put(5.0, 40.0);
-       angleMap.put(8.0, 35.0);
-       angleMap.put(11.0, 30.0);
+       angleMap.put(12.0, 45.0);
+       angleMap.put(13.0, 40.0);
+       angleMap.put(14.0, 35.0);
+       angleMap.put(15.0, 30.0);
 }
 
 public void setShotAngle(){
