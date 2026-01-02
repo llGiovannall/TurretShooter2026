@@ -18,14 +18,16 @@ import edu.wpi.first.math.controller.PIDController;
 import frc.robot.util.LoggedTunableNumber;
 import frc.robot.vision.LimelightHelpers;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
-import frc.Java_Is_UnderControl.Motors.*;
+import frc.Java_Is_UnderControl.Motors.NoMotor;
+import frc.Java_Is_UnderControl.Motors.SparkFlexMotor;
+import frc.Java_Is_UnderControl.Sensors.InfraRed;
 
 import static edu.wpi.first.units.Units.Volts;
 
 
 public class ShooterSubsystem {
 private SparkFlex hoodMotor = new SparkFlex(14, MotorType.kBrushless);
-private  SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
+private SparkFlex shooterBack = new SparkFlex(21, MotorType.kBrushless);
  private TalonFX shooterFront = new TalonFX(8);
  private static InterpolatingDoubleTreeMap angleMap = new InterpolatingDoubleTreeMap();
   private SparkClosedLoopController closedLoopController;
